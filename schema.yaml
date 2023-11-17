@@ -128,6 +128,7 @@ components:
             colSpan: 12
             group: Basic
             order: 6
+            hidden: true
         database:
           title: Database
           type: string
