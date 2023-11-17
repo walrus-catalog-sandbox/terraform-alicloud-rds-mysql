@@ -30,9 +30,13 @@ components:
           default: {}
           additionalProperties:
             type: object
+            x-walrus-ui:
+              colSpan: 12
           x-walrus-ui:
+            colSpan: 12
             group: Basic
             hidden: true
+            order: 1
         infrastructure:
           title: Infrastructure
           type: object
@@ -60,7 +64,9 @@ components:
               title: Vpc Id
               type: string
           x-walrus-ui:
+            colSpan: 12
             group: Basic
+            order: 2
         architecture:
           title: Architecture
           type: string
@@ -72,6 +78,7 @@ components:
           - replication
           x-walrus-ui:
             group: Basic
+            order: 3
         replication_readonly_replicas:
           title: Replication Readonly Replicas
           type: number
@@ -84,6 +91,7 @@ components:
           - 5
           x-walrus-ui:
             group: Basic
+            order: 4
             showIf: architecture=replication
         engine_version:
           title: Engine Version
@@ -96,6 +104,7 @@ components:
           - "5.7"
           x-walrus-ui:
             group: Basic
+            order: 5
         engine_parameters:
           title: Engine Parameters
           type: array
@@ -113,8 +122,12 @@ components:
             - name
             - value
             type: object
+            x-walrus-ui:
+              colSpan: 12
           x-walrus-ui:
+            colSpan: 12
             group: Basic
+            order: 6
         database:
           title: Database
           type: string
@@ -123,6 +136,7 @@ components:
           default: mydb
           x-walrus-ui:
             group: Basic
+            order: 7
         username:
           title: Username
           type: string
@@ -131,14 +145,17 @@ components:
           default: rdsuser
           x-walrus-ui:
             group: Basic
+            order: 8
         password:
           title: Password
           type: string
           description: |
             Specify the account password, ref to https://www.alibabacloud.com/help/en/rds/developer-reference/api-rds-2014-08-15-createaccount.
+          format: password
           writeOnly: true
           x-walrus-ui:
             group: Basic
+            order: 9
         resources:
           title: Resources
           type: object
@@ -153,6 +170,9 @@ components:
               class: string, optional            # https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/primary-apsaradb-rds-for-mysql-instance-types, https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/primary-apsaradb-rds-for-mysql-instance-types-5
               readonly_class: string, optional   # https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/read-only-apsaradb-rds-for-mysql-instance-types, https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/read-only-apsaradb-rds-for-mysql-instance-types-5
             ```
+          default:
+            class: rds.mysql.s2.large
+            readonly_class: rds.mysql.s2.large
           properties:
             class:
               default: rds.mysql.s2.large
@@ -163,7 +183,9 @@ components:
               title: Readonly Class
               type: string
           x-walrus-ui:
+            colSpan: 12
             group: Basic
+            order: 10
         storage:
           title: Storage
           type: object
@@ -178,6 +200,9 @@ components:
               class: string, optional        # https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/db_instance#db_instance_storage_type
               size: number, optional         # in megabyte
             ```
+          default:
+            class: local_ssd
+            size: 20480
           properties:
             class:
               default: local_ssd
@@ -188,4 +213,6 @@ components:
               title: Size
               type: number
           x-walrus-ui:
+            colSpan: 12
             group: Basic
+            order: 11
