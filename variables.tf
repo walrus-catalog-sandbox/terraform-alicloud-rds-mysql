@@ -37,13 +37,13 @@ Examples:
 infrastructure:
   vpc_id: string                  # the ID of the VPC where the MySQL service applies
   kms_key_id: sting,optional      # the ID of the KMS key which to encrypt the MySQL data
-  domain_suffix: string           # a private DNS namespace of the PrivateZone where to register the applied MySQL service
+  domain_suffix: string,optional  # a private DNS namespace of the PrivateZone where to register the applied MySQL service
 ```
 EOF
   type = object({
     vpc_id        = string
     kms_key_id    = optional(string)
-    domain_suffix = string
+    domain_suffix = optional(string)
   })
 }
 

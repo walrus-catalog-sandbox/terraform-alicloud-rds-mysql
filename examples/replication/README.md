@@ -6,9 +6,7 @@ Deploy MySQL service in replication architecture by root moudle.
 # setup infra
 $ tf apply -auto-approve \
   -target=alicloud_vpc.example \
-  -target=alicloud_vswitch.example \
-  -target=alicloud_pvtz_zone.example \
-  -target=alicloud_pvtz_zone_attachment.example
+  -target=alicloud_vswitch.example
 
 # create service
 $ tf apply -auto-approve
@@ -39,12 +37,9 @@ $ tf apply -auto-approve
 
 | Name | Type |
 |------|------|
-| [alicloud_pvtz_zone.example](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/pvtz_zone) | resource |
-| [alicloud_pvtz_zone_attachment.example](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/pvtz_zone_attachment) | resource |
 | [alicloud_vpc.example](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/vpc) | resource |
 | [alicloud_vswitch.example](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/vswitch) | resource |
 | [alicloud_db_zones.selected](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/db_zones) | data source |
-| [alicloud_pvtz_service.selected](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/pvtz_service) | data source |
 
 ## Inputs
 

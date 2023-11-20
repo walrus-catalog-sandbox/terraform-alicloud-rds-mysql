@@ -80,14 +80,14 @@ resource "alicloud_kms_key" "example" {
 
 # create private dns.
 
-data "alicloud_pvtz_service" "selected" {
-  enable = "On"
-}
+# data "alicloud_pvtz_service" "selected" {
+#   enable = "On"
+# }
 
 resource "alicloud_pvtz_zone" "example" {
   zone_name = "my-dev-dns"
 
-  depends_on = [data.alicloud_pvtz_service.selected]
+  # depends_on = [data.alicloud_pvtz_service.selected]
 }
 
 resource "alicloud_pvtz_zone_attachment" "example" {

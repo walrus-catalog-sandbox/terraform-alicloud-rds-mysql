@@ -47,7 +47,6 @@ $ tf apply -auto-approve
 | [alicloud_vswitch.example](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/vswitch) | resource |
 | [alicloud_db_zones.selected](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/db_zones) | data source |
 | [alicloud_kms_keys.example](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/kms_keys) | data source |
-| [alicloud_pvtz_service.selected](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/pvtz_service) | data source |
 
 ## Inputs
 
