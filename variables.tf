@@ -36,7 +36,7 @@ Examples:
 ```
 infrastructure:
   vpc_id: string                  # the ID of the VPC where the MySQL service applies
-  kms_key_id: sting,optional      # the ID of the KMS key which to encrypt the MySQL data
+  kms_key_id: string,optional     # the ID of the KMS key which to encrypt the MySQL data
   domain_suffix: string,optional  # a private DNS namespace of the PrivateZone where to register the applied MySQL service
 ```
 EOF
@@ -107,7 +107,7 @@ EOF
   type        = string
   default     = "mydb"
   validation {
-    condition     = can(regex("^[a-z][-a-z0-9_]{0,62}[a-z0-9]$", var.database))
+    condition     = can(regex("^[a-z][-a-z0-9_]{0,61}[a-z0-9]$", var.database))
     error_message = format("Invalid database: %s", var.database)
   }
 }
