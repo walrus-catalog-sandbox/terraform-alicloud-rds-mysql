@@ -58,7 +58,7 @@ EOF
   type        = string
   default     = "standalone"
   validation {
-    condition     = contains(["standalone", "replication"], var.architecture)
+    condition     = var.architecture == "" || contains(["standalone", "replication"], var.architecture)
     error_message = "Invalid architecture"
   }
 }
@@ -70,7 +70,7 @@ EOF
   type        = number
   default     = 1
   validation {
-    condition     = contains([1, 3, 5], var.replication_readonly_replicas)
+    condition     = var.replication_readonly_replicas == 0 || contains([1, 3, 5], var.replication_readonly_replicas)
     error_message = "Invalid number of read-only replicas"
   }
 }
@@ -82,7 +82,7 @@ EOF
   type        = string
   default     = "8.0"
   validation {
-    condition     = contains(["8.0", "5.7"], var.engine_version)
+    condition     = var.engine_version == "" || contains(["8.0", "5.7"], var.engine_version)
     error_message = "Invalid version"
   }
 }
@@ -107,7 +107,7 @@ EOF
   type        = string
   default     = "mydb"
   validation {
-    condition     = can(regex("^[a-z][-a-z0-9_]{0,61}[a-z0-9]$", var.database))
+    condition     = var.database == "" || can(regex("^[a-z][-a-z0-9_]{0,61}[a-z0-9]$", var.database))
     error_message = format("Invalid database: %s", var.database)
   }
 }
@@ -121,7 +121,7 @@ EOF
   type        = string
   default     = "rdsuser"
   validation {
-    condition     = var.username != "root" && can(regex("^[a-z][a-z0-9_]{0,14}[a-z0-9]$", var.username))
+    condition     = var.username == "" || (var.username != "root" && can(regex("^[a-z][a-z0-9_]{0,14}[a-z0-9]$", var.username)))
     error_message = format("Invalid username: %s", var.username)
   }
 }
@@ -133,10 +133,10 @@ If not specified, it will generate a random password.
 See https://www.alibabacloud.com/help/en/rds/developer-reference/api-rds-2014-08-15-createaccount.
 EOF
   type        = string
-  sensitive   = true
   default     = null
+  sensitive   = true
   validation {
-    condition     = var.password == null || can(regex("^[A-Za-z0-9\\!#\\$%\\^&\\*\\(\\)_\\+\\-=]{8,32}", var.password))
+    condition     = var.password == null || var.password == "" || can(regex("^[A-Za-z0-9\\!#\\$%\\^&\\*\\(\\)_\\+\\-=]{8,32}", var.password))
     error_message = "Invalid password"
   }
 }
