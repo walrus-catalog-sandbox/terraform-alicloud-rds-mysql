@@ -6,6 +6,8 @@ components:
     variables:
       required:
       - infrastructure
+      - architecture
+      - engine_version
       type: object
       properties:
         context:
@@ -14,6 +16,7 @@ components:
           description: |
             Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.
           default: {}
+          nullable: true
           additionalProperties:
             type: object
             x-walrus-ui:
@@ -34,6 +37,7 @@ components:
             domain_suffix:
               description: |
                 Specify the domain suffix of the PrivateZone. The domain suffix must be a valid DNS name.
+              nullable: true
               title: Domain Suffix
               type: string
               x-walrus-ui:
@@ -41,6 +45,7 @@ components:
             kms_key_id:
               description: |
                 Specify the KMS key ID which to encrypt the MySQL data. If not specified, the MySQL data will not be encrypted.
+              nullable: true
               title: Kms Key Id
               type: string
               x-walrus-ui:
@@ -74,6 +79,7 @@ components:
           description: |
             Specify the number of read-only replicas under the replication deployment.
           default: 1
+          nullable: true
           enum:
           - 1
           - 3
@@ -99,6 +105,8 @@ components:
           type: array
           description: |
             Specify the deployment engine parameters. See https://www.alibabacloud.com/help/en/rds/developer-reference/api-rds-2014-08-15-describeparametertemplates.
+          default: []
+          nullable: true
           items:
             properties:
               name:
@@ -125,9 +133,10 @@ components:
             Specify the database name. The database name must be 2-64 characters long and start with any lower letter, combined with number, or symbols: - _. 
             The database name cannot be MySQL forbidden keyword.
             See https://www.alibabacloud.com/help/en/rds/developer-reference/api-rds-2014-08-15-createdatabase.
-          default: mydb
           maxLength: 64
           minLength: 2
+          default: mydb
+          nullable: true
           x-walrus-ui:
             group: Basic
             order: 7
@@ -138,9 +147,10 @@ components:
             Specify the account username. The username must be 2-16 characters long and start with lower letter, combined with number, or symbol: _.
             The username cannot be MySQL forbidden keyword and root.
             See https://www.alibabacloud.com/help/en/rds/developer-reference/api-rds-2014-08-15-createaccount.
+          default: rdsuser
+          nullable: true
           maxLength: 16
           minLength: 2
-          default: rdsuser
           x-walrus-ui:
             group: Basic
             order: 8
@@ -153,6 +163,7 @@ components:
             Specify the account password. The password must be 8-32 characters long and start with any letter, number, or symbols: ! # $ % ^ & * ( ) _ + - =.
             If not specified, it will generate a random password.
             See https://www.alibabacloud.com/help/en/rds/developer-reference/api-rds-2014-08-15-createaccount.
+          nullable: true
           format: password
           writeOnly: true
           x-walrus-ui:
@@ -166,12 +177,14 @@ components:
             The computing resource design of Alibaba Cloud is very complex, it also needs to consider on the storage resource, please view the specification document for more information.
           default:
             class: rds.mysql.s2.large
+          nullable: true
           properties:
             class:
               description: |
                 Specify the computing resources for primary instance. 
                 See https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/primary-apsaradb-rds-for-mysql-instance-types, https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/primary-apsaradb-rds-for-mysql-instance-types-5.
               default: rds.mysql.s2.large
+              nullable: true
               title: Class
               type: string
               x-walrus-ui:
@@ -181,6 +194,7 @@ components:
                 Specify the computing resources for readonly instance.
                 Must configure this field when `architecture` is `replication`.
                 See https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/read-only-apsaradb-rds-for-mysql-instance-types, https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/read-only-apsaradb-rds-for-mysql-instance-types-5.
+              nullable: true
               title: Readonly Class
               type: string
               x-walrus-ui:
@@ -198,11 +212,13 @@ components:
           default:
             class: local_ssd
             size: 20480
+          nullable: true
           properties:
             class:
               description: |
                 Specify the storage class. See https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/db_instance#db_instance_storage_type.
               default: local_ssd
+              nullable: true
               title: Class
               type: string
               x-walrus-ui:
@@ -211,8 +227,10 @@ components:
               description: |
                 Specify the storage size. Unit is megabyte.
               default: 20480
+              nullable: true
               title: Size(MiB)
               type: number
+              minimum: 10240
               x-walrus-ui:
                 order: 2
           x-walrus-ui:
