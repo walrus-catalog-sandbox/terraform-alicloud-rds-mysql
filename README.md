@@ -53,6 +53,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [alicloud_db_connection.primary](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/db_connection) | resource |
+| [alicloud_db_connection.secondary](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/db_connection) | resource |
 | [alicloud_db_database.database](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/db_database) | resource |
 | [alicloud_db_instance.primary](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/db_instance) | resource |
 | [alicloud_db_readonly_instance.secondary](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/db_readonly_instance) | resource |
