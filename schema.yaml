@@ -192,7 +192,7 @@ components:
             readonly_class:
               description: |
                 Specify the computing resources for readonly instance.
-                Must configure this field when `architecture` is `replication`.
+                Configure this field when `architecture` is `replication`, if not specified, it will use the same value as `class`.
                 See https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/read-only-apsaradb-rds-for-mysql-instance-types, https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/read-only-apsaradb-rds-for-mysql-instance-types-5.
               nullable: true
               title: Readonly Class
