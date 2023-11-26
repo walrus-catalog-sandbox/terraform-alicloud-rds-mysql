@@ -205,6 +205,8 @@ resource "alicloud_db_database" "database" {
 }
 
 resource "alicloud_rds_account" "account" {
+  account_description = local.description
+
   db_instance_id   = alicloud_db_instance.primary.id
   account_type     = "Super"
   account_name     = local.username
