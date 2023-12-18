@@ -170,7 +170,7 @@ resource "alicloud_db_instance" "primary" {
   engine         = "MySQL"
   engine_version = local.version
   dynamic "parameters" {
-    for_each = local.parameters
+    for_each = try(nonsensitive(local.parameters), local.parameters)
     content {
       name  = parameters.key
       value = parameters.value
@@ -235,7 +235,7 @@ resource "alicloud_db_readonly_instance" "secondary" {
 
   engine_version = alicloud_db_instance.primary.engine_version
   dynamic "parameters" {
-    for_each = local.parameters
+    for_each = try(nonsensitive(local.parameters), local.parameters)
     content {
       name  = parameters.key
       value = parameters.value
