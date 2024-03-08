@@ -9,7 +9,7 @@ locals {
   namespace = join("-", [local.project_name, local.environment_name])
 
   tags = {
-    "Name" = join("-", [local.namespace, local.resource_name])
+    "Name" = local.resource_name
 
     "walrus.seal.io/catalog-name"     = "terraform-alicloud-rds-mysql"
     "walrus.seal.io/project-id"       = local.project_id
@@ -126,7 +126,6 @@ resource "random_string" "name_suffix" {
 
 locals {
   name        = join("-", [local.resource_name, random_string.name_suffix.result])
-  fullname    = join("-", [local.namespace, local.name])
   description = "Created by Walrus catalog, and provisioned by Terraform."
   database    = coalesce(var.database, "mydb")
   username    = coalesce(var.username, "rdsuser")
@@ -181,7 +180,7 @@ locals {
 }
 
 resource "alicloud_db_instance" "primary" {
-  instance_name = local.fullname
+  instance_name = local.name
   tags          = local.tags
 
   category        = "HighAvailability"
@@ -249,7 +248,7 @@ resource "alicloud_rds_account" "account" {
 resource "alicloud_db_readonly_instance" "secondary" {
   count = local.architecture == "replication" ? local.replication_readonly_replicas : 0
 
-  instance_name = join("-", [local.fullname, "secondary", tostring(count.index)])
+  instance_name = join("-", [local.name, "secondary", tostring(count.index)])
   tags          = local.tags
 
   master_db_instance_id = alicloud_db_instance.primary.id
